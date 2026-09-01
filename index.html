@@ -167,10 +167,10 @@
     <section id="sec-register" class="hidden space-y-4">
       <div class="glass-card rounded-3xl p-6 md:p-8 max-w-2xl mx-auto text-gray-800">
         <h2 class="text-2xl font-bold text-gray-900 border-b border-gray-200 pb-4 mb-2 flex items-center gap-2">
-          <span class="text-blue-600">📝</span> ลงทะเบียนเข้าร่วมกิจกรรม (Participants)
+          <span class="text-blue-600">📝</span> ลงทะเบียนเข้าร่วมกิจกรรม
         </h2>
         <div class="mb-6 bg-blue-50 border border-blue-100 p-4 rounded-xl">
-          <p class="text-xs text-blue-600 font-semibold uppercase">หัวข้อกิจกรรมที่สมัคร (Event Topic):</p>
+          <p class="text-xs text-blue-600 font-semibold uppercase">หัวข้อกิจกรรมที่สมัคร (event_topic):</p>
           <p id="display-act-title" class="text-lg font-bold text-blue-900">-</p>
         </div>
 
@@ -190,7 +190,7 @@
               </select>
             </div>
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-1">ชื่อ (Participants) *</label>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">ชื่อจริง (Participants) *</label>
               <input type="text" id="reg-firstname" required class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 outline-none text-sm">
             </div>
             <div>
@@ -214,7 +214,7 @@
       </div>
     </section>
 
-    <!-- 4. หน้าใหม่: ระบบเช็คชื่อตามดีไซน์ต้นฉบับ -->
+    <!-- 4. หน้าเช็คชื่อ -->
     <section id="sec-checkin" class="hidden space-y-6 sarabun-font">
       <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl text-gray-800 space-y-6">
         
@@ -226,12 +226,11 @@
           <button onclick="logoutAdmin()" class="text-xs bg-red-100 text-red-600 font-bold px-3 py-1.5 rounded-lg hover:bg-red-200 transition">ออกจากระบบ</button>
         </div>
 
-        <!-- Header Banner เตือนสถานะเริ่มต้น -->
         <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-2xl flex items-start space-x-3">
           <span class="text-xl">❌</span>
           <div class="text-sm">
             <span class="font-bold">สถานะเริ่มต้นก่อนเช็คชื่อสำหรับทุกคนจะถูกตั้งค่าเป็น "ขาด" อัตโนมัติ</span><br>
-            กดปุ่มเปลี่ยนสถานะ "มา", "สาย", "ลา" หรือ "ขาด" ให้ผู้เข้าร่วม (Participants) ที่มาร่วม
+            กดปุ่มเปลี่ยนสถานะ "มา", "สาย", "ลา" หรือ "ขาด" ให้ผู้เข้าร่วมที่มาร่วมงาน
           </div>
         </div>
 
@@ -251,7 +250,7 @@
               <input type="date" id="checkin-date" value="2026-09-01" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-gray-600 mb-1">📚 หัวข้อกิจกรรม (Event Topic)</label>
+              <label class="block text-xs font-semibold text-gray-600 mb-1">📚 หัวข้อกิจกรรม (event_topic)</label>
               <select id="checkin-activity-select" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
                 <option>ประชุมองค์กร / สภานักเรียน</option>
               </select>
@@ -263,7 +262,7 @@
           </div>
         </div>
 
-        <!-- Section 2: รายชื่อผู้เข้าร่วมและทำเครื่องหมายเช็คชื่อ -->
+        <!-- Section 2: รายชื่อผู้เข้าร่วม -->
         <div class="space-y-6">
           <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-gray-100 pb-4">
             <div class="flex items-center space-x-2">
@@ -271,7 +270,6 @@
               <h2 class="font-bold text-lg text-gray-800">รายชื่อผู้เข้าร่วม (Participants) และทำเครื่องหมายเช็คชื่อ</h2>
             </div>
             
-            <!-- ปุ่มเปิดหน้าต่าง Modal เพิ่มรายชื่อ -->
             <div class="flex flex-wrap items-center gap-2">
               <button onclick="openAddModal()" class="bg-blue-600 text-white text-xs md:text-sm px-4 py-2 rounded-xl shadow hover:bg-blue-700 transition flex items-center gap-1 font-bold">
                 ➕ เพิ่มรายชื่อผู้เข้าร่วม
@@ -279,7 +277,6 @@
             </div>
           </div>
 
-          <!-- สรุปจำนวนสถานะ -->
           <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center" id="stats-container">
             <div class="bg-gray-50 p-3 rounded-2xl border border-gray-200">
               <div class="text-xs text-gray-500 mb-1">ผู้เข้าร่วมทั้งหมด</div>
@@ -303,7 +300,6 @@
             </div>
           </div>
 
-          <!-- กล่องเลื่อนดูรายชื่อ -->
           <div class="max-h-[420px] overflow-y-auto pr-2 divide-y divide-gray-100 bg-gray-50/50 p-4 rounded-2xl border border-gray-200" id="checkin-list-container">
             <p class="text-center text-gray-400 py-6">กำลังโหลดรายชื่อผู้เข้าร่วม...</p>
           </div>
@@ -312,7 +308,7 @@
       </div>
     </section>
 
-    <!-- 5. ระบบหลังบ้าน: หน้ารวมการ์ดกิจกรรม (Admin Dashboard) -->
+    <!-- 5. ระบบหลังบ้าน: Dashboard -->
     <section id="sec-admin" class="hidden space-y-6">
       <div class="glass-card p-6 rounded-3xl flex flex-col md:flex-row justify-between items-center gap-4 text-gray-800">
         <div>
@@ -330,7 +326,7 @@
       </div>
     </section>
 
-    <!-- 6. ระบบหลังบ้าน: หน้าจัดการรายชื่อเฉพาะกิจกรรมที่เลือก -->
+    <!-- 6. ระบบหลังบ้าน: รายละเอียดเฉพาะกิจกรรม -->
     <section id="sec-admin-detail" class="hidden space-y-6">
       <div class="flex items-center justify-between">
         <button onclick="switchTab('admin')" class="bg-white/20 hover:bg-white/30 text-white font-bold px-4 py-2 rounded-xl text-sm transition flex items-center gap-2 backdrop-blur">
@@ -346,19 +342,19 @@
 
   </main>
 
-  <!-- หน้าต่าง Modal ลอยสำหรับเพิ่มรายชื่อผู้เข้าร่วม -->
+  <!-- หน้าต่าง Modal สำหรับเพิ่มรายชื่อ -->
   <div id="add-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-md w-full p-6 md:p-8 shadow-2xl space-y-6 text-gray-800 animate-fadeIn">
       <div class="flex justify-between items-center border-b pb-4">
         <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
-          <span>➕</span> เพิ่มรายชื่อผู้เข้าร่วมใหม่ (Participants)
+          <span>➕</span> เพิ่มรายชื่อผู้เข้าร่วมใหม่
         </h3>
         <button onclick="closeAddModal()" class="text-gray-400 hover:text-gray-600 font-bold text-xl">✕</button>
       </div>
 
       <form onsubmit="handleModalAdd(event)" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">เลือกหัวข้อกิจกรรม (Event Topic) *</label>
+          <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">เลือกหัวข้อกิจกรรม (event_topic) *</label>
           <select id="modal-event-topic-select" required class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-sm outline-none focus:border-blue-500">
             <option value="">-- เลือกหัวข้อกิจกรรม --</option>
           </select>
@@ -403,7 +399,7 @@
     </div>
   </div>
 
-  <!-- Script สำหรับจัดการระบบทั้งหมด -->
+  <!-- Script จัดการระบบ -->
   <script>
     const SUPABASE_URL = "https://fmemcvzvoxfbiqldtkyx.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_5fM-4pLBPNfe48AHmocIHw__QKX3cIV";
@@ -572,7 +568,7 @@
     }
 
     async function deleteActivity(activityId, activityTitle) {
-      if (!confirm(`⚠️ คุณแน่ใจหรือไม่ที่จะลบกิจกรรม "${activityTitle}"?\nการกระทำนี้จะลบข้อมูลผู้เข้าร่วม (Participants) ทั้งหมดในหัวข้อนี้ด้วย!`)) return;
+      if (!confirm(`⚠️ คุณแน่ใจหรือไม่ที่จะลบกิจกรรม "${activityTitle}"?\nการกระทำนี้จะลบข้อมูลผู้เข้าร่วมทั้งหมดในหัวข้อนี้ด้วย!`)) return;
 
       try {
         await supabaseClient.from('participants').delete().eq('activity_id', activityId);
@@ -590,14 +586,15 @@
       const activityId = document.getElementById('reg-activity-id').value;
       const act = activeActivitiesData[activityId];
 
+      // แยกบันทึก event_topic กับ first_name ออกจากกันอย่างเด็ดขาดตามคอลัมน์ฐานข้อมูล
       const applicantData = {
         activity_id: activityId,
-        event_topic: act ? act.title : 'กิจกรรมทั่วไป', <!-- แยกคอลัมน์ event_topic เป็นรายชื่อที่ต้องเช็ก -->
+        event_topic: act ? act.title : 'กิจกรรมทั่วไป', 
         prefix: document.getElementById('reg-prefix').value,
-        first_name: document.getElementById('reg-firstname').value, <!-- แยกคอลัมน์ participants (first_name) เป็นรายชื่อผู้เข้าร่วม -->
-        last_name: document.getElementById('reg-lastname').value,
-        phone: document.getElementById('reg-phone').value,
-        school: document.getElementById('reg-school').value,
+        first_name: document.getElementById('reg-firstname').value.trim(), 
+        last_name: document.getElementById('reg-lastname').value.trim(),
+        phone: document.getElementById('reg-phone').value.trim(),
+        school: document.getElementById('reg-school').value.trim(),
         checked_in: false,
         attendance_status: 'ขาด'
       };
@@ -647,12 +644,12 @@
           else absent++;
 
           const prefixStr = p.prefix ? p.prefix : '';
-          const fullName = `${prefixStr}${p.first_name} ${p.last_name}`; <!-- แสดงผล participants -->
-          const topicName = p.event_topic || 'กิจกรรมทั่วไป'; <!-- แสดงผล event_topic -->
+          const fullName = `${prefixStr}${p.first_name} ${p.last_name}`; // ดึงจากคอลัมน์ first_name & last_name
+          const topicName = p.event_topic || 'กิจกรรมทั่วไป'; // ดึงจากคอลัมน์ event_topic แยกต่างหาก
           const subInfo = `${p.school || 'ม.5/3'} • โทร: ${p.phone || 'ไม่ระบุ'} • หัวข้อ: <span class="text-blue-600 font-semibold">${topicName}</span>`;
           const codeId = p.id ? String(p.id).slice(-5) : '1388' + index;
 
-          container.innerHTML += `
+          container.innerHTML += 
             <div class="py-3 flex justify-between items-center border-b border-gray-100 last:border-none gap-2">
               <div>
                 <span class="text-gray-900 font-bold text-sm">[${codeId}] ${fullName}</span>
@@ -664,7 +661,6 @@
                 <button onclick="setAttendance('${p.id}', 'ลา')" class="px-3 py-1 text-xs border rounded-lg transition ${status === 'ลา' ? 'bg-sky-500 text-white font-semibold border-sky-500 shadow-sm' : 'border-gray-300 hover:bg-gray-100 text-gray-700'}">ลา</button>
                 <button onclick="setAttendance('${p.id}', 'ขาด')" class="px-3 py-1 text-xs border rounded-lg transition ${status === 'ขาด' ? 'bg-rose-500 text-white font-semibold border-rose-500 shadow-sm' : 'border-gray-300 hover:bg-gray-100 text-gray-700'}">ขาด</button>
                 
-                <!-- ปุ่มลบรายชื่อผู้เข้าร่วม -->
                 <button onclick="deleteParticipant('${p.id}', '${fullName}')" class="p-1.5 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition ml-1" title="ลบรายชื่อนี้">
                   🗑️
                 </button>
@@ -717,13 +713,12 @@
     }
 
     async function openAddModal() {
-      // ดึงรายการหัวข้อกิจกรรมมาใส่ใน Dropdown ของ Modal
       try {
         const { data, error } = await supabaseClient.from('activities').select('id, title');
         if (error) throw error;
 
         const selectEl = document.getElementById('modal-event-topic-select');
-        selectEl.innerHTML = '<option value="">-- เลือกหัวข้อกิจกรรม (Event Topic) --</option>';
+        selectEl.innerHTML = '<option value="">-- เลือกหัวข้อกิจกรรม (event_topic) --</option>';
         
         if (data && data.length > 0) {
           data.forEach(act => {
@@ -744,19 +739,20 @@
       e.preventDefault();
       const activityId = document.getElementById('modal-event-topic-select').value;
       const selectEl = document.getElementById('modal-event-topic-select');
-      const eventTopicText = selectEl.options[selectEl.selectedIndex].text; // ดึงชื่อหัวข้อกิจกรรม
+      const eventTopicText = selectEl.options[selectEl.selectedIndex].text; // ชื่อหัวข้อกิจกรรมสำหรับ event_topic
 
       const prefix = document.getElementById('modal-prefix').value;
-      const firstName = document.getElementById('modal-firstname').value.trim(); // คอลัมน์ participants
+      const firstName = document.getElementById('modal-firstname').value.trim(); // ชื่อจริงแยกเก็บลง first_name
       const lastName = document.getElementById('modal-lastname').value.trim();
       const school = document.getElementById('modal-school').value.trim() || 'ม.5/3';
       const phone = document.getElementById('modal-phone').value.trim() || '-';
 
+      // จัดโครงสร้างให้แยกคอลัมน์ event_topic และ first_name อย่างชัดเจน
       const newPerson = {
         activity_id: activityId || null,
-        event_topic: eventTopicText, <!-- แยกคอลัมน์ event_topic ชัดเจน -->
+        event_topic: eventTopicText, 
         prefix: prefix,
-        first_name: firstName, <!-- แยกคอลัมน์ participants (first_name) ชัดเจน -->
+        first_name: firstName, 
         last_name: lastName,
         school: school,
         phone: phone,
@@ -799,7 +795,7 @@
           const count = participants.filter(p => String(p.activity_id) === String(act.id)).length;
           const imgUrl = act.image_url || 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80';
 
-          container.innerHTML += `
+          container.innerHTML +=
             <div class="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 flex flex-col justify-between">
               <div>
                 <div class="relative w-full aspect-video-custom overflow-hidden bg-gray-100">
@@ -872,7 +868,7 @@
                 <img src="${imgUrl}" class="w-full h-full object-cover">
               </div>
               <div class="flex-grow space-y-2 w-full">
-                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">หัวข้อกิจกรรม (Event Topic): ${act.title}</span>
+                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">event_topic: ${act.title}</span>
                 <h2 class="text-2xl font-bold text-gray-900">รายชื่อผู้เข้าร่วม (Participants)</h2>
                 <p class="text-sm text-gray-600 flex items-center gap-2"><span>📅</span> ${act.event_date || 'ไม่ระบุวันที่'}</p>
                 <p class="text-sm text-gray-600 flex items-center gap-2"><span>📍</span> ${act.location || 'ไม่ระบุสถานที่'}</p>
@@ -888,7 +884,7 @@
             </div>
 
             <div class="space-y-3">
-              <h3 class="text-lg font-bold text-gray-900">รายชื่อผู้เข้าร่วม (Participants)</h3>
+              <h3 class="text-lg font-bold text-gray-900">ตารางรายชื่อผู้เข้าร่วม (Participants)</h3>
               <div class="max-h-[350px] overflow-y-auto rounded-2xl border border-gray-200">
                 <table class="w-full text-left border-collapse">
                   <thead class="bg-gray-50 text-xs font-bold text-gray-500 uppercase sticky top-0">
@@ -926,7 +922,7 @@
           return;
         }
 
-        let csvContent = "\uFEFFลำดับ,หัวข้อกิจกรรม (Event Topic),คำนำหน้า,ชื่อ (Participants),นามสกุล,เบอร์โทรศัพท์,ระดับชั้น,สถานะ,วันที่สมัคร\n";
+        let csvContent = "\uFEFFลำดับ,event_topic,คำนำหน้า,participants (first_name),นามสกุล,เบอร์โทรศัพท์,ระดับชั้น,สถานะ,วันที่สมัคร\n";
         data.forEach((p, index) => {
           const status = p.attendance_status || (p.checked_in ? 'มา' : 'ขาด');
           const row = [
